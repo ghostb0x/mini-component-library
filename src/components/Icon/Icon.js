@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Search, AtSign, ChevronDown } from 'react-feather';
 
 const icons = {
-  search: Search,
+  'search': Search,
   'at-sign': AtSign,
   'chevron-down': ChevronDown,
 };

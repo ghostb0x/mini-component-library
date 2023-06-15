@@ -66,6 +66,7 @@ const StyledSelect = styled.select`
   left: 0;
   height: 100%;
   width: 100%;
+  appearance: none;
 `;
 
 const StyledIcon = styled(Icon)`
