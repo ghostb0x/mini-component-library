@@ -43,6 +43,7 @@ const ProgressBar = ({ value, size }) => {
         '--border-radius': '4px',
         '--inner-padding': '0',
         '--completion-corner-radius': `4px ${completionCornerRadius} ${completionCornerRadius} 4px`,
+        '--innerWidth': (value / 100) * 370 + 'px',
       };
       break;
     }
@@ -52,6 +53,7 @@ const ProgressBar = ({ value, size }) => {
         '--border-radius': '4px',
         '--inner-padding': '0',
         '--completion-corner-radius': `4px ${completionCornerRadius} ${completionCornerRadius} 4px`,
+        '--innerWidth': (value / 100) * 370 + 'px',
       };
       break;
     }
@@ -61,6 +63,7 @@ const ProgressBar = ({ value, size }) => {
         '--border-radius': '8px',
         '--inner-padding': '4px',
         '--completion-corner-radius': `4px ${completionCornerRadius} ${completionCornerRadius} 4px`,
+        '--innerWidth': (value / 100) * (370 - 8) + 'px',
       };
       break;
     }
@@ -70,6 +73,7 @@ const ProgressBar = ({ value, size }) => {
   }
 
   // consistent across all size variants
+
   const sizeConsts = {
     '--width': '370px',
   };
@@ -80,20 +84,48 @@ const ProgressBar = ({ value, size }) => {
   return (
     <>
       <label for="progress-bar">
-        Process Progress:
+        Process Progress: {value}
         <VisuallyHidden>Current Progress is {value}%</VisuallyHidden>
       </label>
-        <ProgressBarStyled
-          id="progress-bar"
-          style={styles}
-          value={value}
-          max="100"
-        ></ProgressBarStyled>
+      {/* <ProgressBarStyled
+        id="progress-element"
+        style={styles}
+        value={value}
+        max="100"
+      ></ProgressBarStyled> */}
+
+      <ProgressDiv
+        id="progress-bar"
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={value}
+        style={styles}
+      >
+        <ProgressInner />
+      </ProgressDiv>
     </>
   );
 };
 
+const ProgressDiv = styled.div`
+  height: var(--height);
+  width: var(--width);
+  box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
+  background-color: ${COLORS.transparentGray15};
+  border-radius: var(--border-radius);
+  padding: var(--inner-padding);
+  overflow: clip;
+`;
 
+const ProgressInner = styled.div`
+  height: 16px;
+  width: var(--innerWidth);
+  background-color: ${COLORS.primary};
+  border-radius: var(--completion-corner-radius);
+`;
+
+// using native progress element
 const ProgressBarStyled = styled.progress`
   -webkit-appearance: none;
   appearance: none;
