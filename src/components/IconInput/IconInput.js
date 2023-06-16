@@ -79,7 +79,7 @@ const Wrapper = styled.div`
   position: relative;
   width: var(--width);
   border-bottom: var(--border-stroke) solid black;
-git 
+
   &:focus-within {
     outline: var(--border-stroke) solid black;
     outline-offset: 4px;
